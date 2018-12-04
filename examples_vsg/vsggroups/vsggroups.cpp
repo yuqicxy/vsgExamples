@@ -5,6 +5,8 @@
 
 #include <vsg/nodes/Group.h>
 #include <vsg/nodes/QuadGroup.h>
+#include <vsg/nodes/SmallGroup.h>
+
 #include <vsg/utils/CommandLine.h>
 
 #include <iostream>
@@ -158,6 +160,30 @@ vsg::Node* createVsgQuadTree(unsigned int numLevels, unsigned int& numNodes, uns
     return t;
 }
 
+vsg::Node* createSmallGroupTree(unsigned int numLevels, unsigned int& numNodes, unsigned int& numBytes)
+{
+    if (numLevels==0)
+    {
+        numNodes += 1;
+        numBytes += sizeof(vsg::Node);
+
+        return new vsg::Node;
+    }
+
+    vsg::SmallGroup* t = new vsg::SmallGroup(4);
+
+    --numLevels;
+
+    numNodes += 1;
+    numBytes += sizeof(vsg::SmallGroup);
+
+    t->setChild(0, createSmallGroupTree(numLevels, numNodes, numBytes));
+    t->setChild(1, createSmallGroupTree(numLevels, numNodes, numBytes));
+    t->setChild(2, createSmallGroupTree(numLevels, numNodes, numBytes));
+    t->setChild(3, createSmallGroupTree(numLevels, numNodes, numBytes));
+
+    return t;
+}
 
 vsg::Node* createFixedQuadTree(unsigned int numLevels, unsigned int& numNodes, unsigned int& numBytes)
 {
@@ -231,6 +257,7 @@ int main(int argc, char** argv)
 
     if (type=="vsg::Group") vsg_root = createVsgQuadTree(numLevels, numNodes, numBytes);
     if (type=="vsg::QuadGroup") vsg_root = createFixedQuadTree(numLevels, numNodes, numBytes);
+    if (type=="vsg::SmallGroup") vsg_root = createSmallGroupTree(numLevels, numNodes, numBytes);
     if (type=="SharedPtrGroup") shared_root = createSharedPtrQuadTree(numLevels, numNodes, numBytes)->shared_from_this();
 
     if (!vsg_root && !shared_root)
