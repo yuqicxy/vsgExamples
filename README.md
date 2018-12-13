@@ -11,7 +11,7 @@ The [Desktop](Desktop/) directory contains examples use the VSG's native Windowi
 The [Android](Android/) directory contains examples illustrate how to create Android graphics applications
 
 ## Osg/vsg examples
-The [Osg](Osg/) directory contains a small set of example that depend upon the core **vsg** library, **Vulkan**, and add the dependency on [OpenSceneGraph](https://github.com/openscenegraph/OpenSceneGraph/). The osg examples are only built when both the VSG and OSG are available.  These examples use the OSG for data and performance comparison purposes.
+The [Osg](Osg/) directory contains a small set of examples that depend upon the core **vsg** library, **Vulkan**, and add the dependency on [OpenSceneGraph](https://github.com/openscenegraph/OpenSceneGraph/). The osg examples are only built when both the VSG and OSG are available.  These examples use the OSG for data and performance comparison purposes.
 
 ## Quick Guide to Building the vsgExamples
 
@@ -19,7 +19,7 @@ The [Osg](Osg/) directory contains a small set of example that depend upon the c
 * C++17 compliant compiler i.e.. g++ 7.3 or later, Clang 6.0 or later, Visual Studio S2017 or later.
 * [Vulkan](https://vulkan.lunarg.com/) 1.1 or later.
 * [CMake](https://www.cmake.org) 3.7 or later.
-* Under Linux and macOS : [GLFW](https://www.glfw.org)  3.3 or later.  Used internally by libvsg. The plan is to implement native Windowing support so this dependency will later be removed, so far only Windows has native Windowing.
+* Under macOS : [GLFW](https://www.glfw.org)  3.3 or later.  Used internally by libvsg. The plan is to implement native Windowing support so this dependency will later be removed. The VSG provides native windowing for Windows, Linux and Android so there is no need for GLFW.
 * [VulkanSceneGraphPrototype](https://github.com/vsg-dev/VulkanSceneGraphPrototype/) use master
 
 ### Optional Dependencies:
