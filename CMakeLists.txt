@@ -14,8 +14,28 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE)
 endif(NOT CMAKE_BUILD_TYPE)
 
+SET(CMAKE_MODULE_PATH "${vsgExamples_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+
+message(STATUS "${CMAKE_MODULE_PATH}")
+
 # find the vsg
-find_package(vsg REQUIRED)
+find_package(VSG REQUIRED)
+find_package(Vulkan)
+
+message(STATUS "${VSG_INCLUDE_DIR}")
+message(STATUS "${VSG_Debug_LIBRARY}")
+message(STATUS "${VSG_MinSizeRel_LIBRARY}")
+message(STATUS "${VSG_Release_LIBRARY}")
+message(STATUS "${VSG_Release_DebugInfo_LIBRARY}")
+
+SET(CMAKE_DEBUG_POSTFIX  "d" CACHE STRING "add a postfix, usually d on windows")
+SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windows")
+SET(CMAKE_RELWITHDEBINFO_POSTFIX "rd" CACHE STRING "add a postfix, usually empty on windows")
+SET(CMAKE_MINSIZEREL_POSTFIX "s" CACHE STRING "add a postfix, usually empty on windows")
+
+set(LIBRARIES Vulkan::Vulkan)
+
+INCLUDE_DIRECTORIES(${VSG_INCLUDE_DIR} ${Vulkan_INCLUDE_DIR})
 
 # set the use of C++17 globally as all examples require it
 set(CMAKE_CXX_STANDARD 17)
@@ -33,3 +53,4 @@ if (ANDROID)
 else()
     add_subdirectory(Desktop)
 endif()
+

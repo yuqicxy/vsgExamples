@@ -2,4 +2,6 @@ set(SOURCES vsgpointer.cpp)
 
 add_executable(vsgpointer ${SOURCES})
 
-target_link_libraries(vsgpointer vsg::vsg)
+TARGET_LINK_LIBRARIES(vsgpointer "${LIBRARIES}")
+TARGET_LINK_LIBRARIES(vsgpointer optimized "${VSG_LIBRARY}" debug "${VSG_LIBRARY_DEBUG}")
+set_property(TARGET vsgpointer PROPERTY CXX_STANDARD 17)

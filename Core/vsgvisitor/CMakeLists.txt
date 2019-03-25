@@ -2,4 +2,7 @@ set(SOURCES vsgvisitor.cpp)
 
 add_executable(vsgvisitor ${SOURCES})
 
-target_link_libraries(vsgvisitor vsg::vsg)
+
+TARGET_LINK_LIBRARIES(vsgvisitor "${LIBRARIES}")
+TARGET_LINK_LIBRARIES(vsgvisitor optimized "${VSG_LIBRARY}" debug "${VSG_LIBRARY_DEBUG}")
+set_property(TARGET vsgvisitor PROPERTY CXX_STANDARD 17)

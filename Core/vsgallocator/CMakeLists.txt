@@ -2,4 +2,8 @@ set(SOURCES vsgallocator.cpp)
 
 add_executable(vsgallocator ${SOURCES})
 
-target_link_libraries(vsgallocator vsg::vsg)
+
+TARGET_LINK_LIBRARIES(vsgallocator "${LIBRARIES}")
+TARGET_LINK_LIBRARIES(vsgallocator optimized "${VSG_LIBRARY}" debug "${VSG_LIBRARY_DEBUG}")
+
+set_property(TARGET vsgallocator PROPERTY CXX_STANDARD 17)
