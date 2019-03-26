@@ -16,17 +16,9 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 SET(CMAKE_MODULE_PATH "${vsgExamples_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
 
-message(STATUS "${CMAKE_MODULE_PATH}")
-
 # find the vsg
 find_package(VSG REQUIRED)
 find_package(Vulkan)
-
-message(STATUS "${VSG_INCLUDE_DIR}")
-message(STATUS "${VSG_Debug_LIBRARY}")
-message(STATUS "${VSG_MinSizeRel_LIBRARY}")
-message(STATUS "${VSG_Release_LIBRARY}")
-message(STATUS "${VSG_Release_DebugInfo_LIBRARY}")
 
 SET(CMAKE_DEBUG_POSTFIX  "d" CACHE STRING "add a postfix, usually d on windows")
 SET(CMAKE_RELEASE_POSTFIX "" CACHE STRING "add a postfix, usually empty on windows")
@@ -54,3 +46,4 @@ else()
     add_subdirectory(Desktop)
 endif()
 
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
